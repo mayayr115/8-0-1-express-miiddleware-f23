@@ -1,7 +1,10 @@
+// TAKE OUT DIST FROM GITIGNORE!!!
+
 const gifs = require('./gifs.json');
 const express = require('express');
 
 // 1. Import Path
+const pathToDistFolder = path.join(__dirname, '..', 'path', 'to', 'frontend', 'dist');
 
 // 2. Define a path to the dist folder
 
@@ -18,7 +21,8 @@ const app = express();
 
 
 // "Response" controllers send data to the client
-const serveData = (req, res, next) => res.send(gifs);
+const serveStatic = (req, res, next) => {const filepath = path.resolve(__dirname, '..', index.html)}
+const serveData = (req, res, next) => res.send(<h1>Hello World</h1>);
 const serveHello = (req, res, next) => {
   const name = req.query.name || "stranger";
   res.send(`hello ${name}`);
@@ -30,7 +34,7 @@ const serveHello = (req, res, next) => {
 
 // 5. Use both middleware
 
-
+app.get('/', serveHello)
 app.get('/api/hello', serveHello);
 app.get('/api/data', serveData);
 
